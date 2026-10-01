@@ -1,0 +1,8 @@
+__pycache__/
+.pytest_cache/
+config.local.yaml
+# Raw scraped material (internal Chat posts, admin pages) and build output stay local
+issues/*/sources/*
+!issues/*/sources/.gitkeep
+issues/*/build/
+issues/*/dashboard.png

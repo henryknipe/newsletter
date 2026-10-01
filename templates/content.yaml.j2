@@ -1,0 +1,63 @@
+# Quantum Mottle - {{ issue.month_name }} {{ issue.year }}
+# Reporting period: {{ issue.prev_month_name }} {{ issue.prev_year }}
+#
+# Text fields accept light markdown: **bold**, *italic*, [link](https://...),
+# blank line = new paragraph, "- item" = arrow bullet.
+# Any section can take `body_file: something.md` instead of `body:`.
+# Delete a section (or leave its body empty) to leave it out of the email.
+
+# subject: "Quantum Mottle - {{ issue.month_name }} {{ issue.year }}"   # default from config.yaml
+preheader: ""          # inbox preview text, optional
+
+editor_in_chief:
+  body_file: editor_in_chief.md
+  signoff: "-H"
+
+dashboard:
+  # Written by `qm gather`. Or set image_url: to a hosted copy.
+  image: dashboard.png
+
+# Two per row. icon: is optional - a URL or a file in assets/icons/
+# (e.g. a PNG downloaded from magnific.com/icons).
+updates:
+  - title: TODO
+    body: |
+      TODO
+    # url: https://radiopaedia.org/...
+    # icon: assets/icons/example.png
+  - title: TODO
+    body: |
+      TODO
+
+release_updates:
+  # Summarise sources/release_notes.txt into a few terse bullets.
+  intro: "Summary of the latest updates:"
+  items:
+    - TODO
+
+style_guide:
+  author: Arlene Campos
+  # `qm gather` writes style_guide.md from Arlene's doc when it finds this month.
+  body_file: style_guide.md
+  # link: https://radiopaedia.org/articles/style-guide
+  # link_text: Read more in the style guide
+
+meetup:
+  month: {{ issue.prev_month_name }}
+  discussed:
+    - TODO
+  # From sources/next_meeting.txt
+  next: "TODO 0900 UTC"
+
+priority_project:
+  name: TODO
+  body: |
+    TODO
+  button_text: Get Involved!
+  button_url: https://www.radiopaedia.org/projects
+
+social_magic_moments:
+  # Pick one from sources/social_magic_moments.md
+  body: |
+    TODO
+  credit: ""   # e.g. "Passed on by Rachel"

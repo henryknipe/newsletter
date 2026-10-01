@@ -1,0 +1,36 @@
+# Shared settings. Put personal overrides in config.local.yaml (git-ignored).
+
+newsletter:
+  subject: "Quantum Mottle - {month} {year}"
+  from: "Henry Knipe <henry.knipe@radiopaedia.org>"
+  # The .eml draft is addressed to you; add the editorial board as BCC when you send.
+  to: "henry.knipe@radiopaedia.org"
+  contact_email: "henry.knipe@radiopaedia.org"
+  contact_dm_url: "https://radiopaedia.org/chat/editorial-board/messages/@henryknipe"
+  # The "Made with postcards" badge + tracking pixel from the Postcards export.
+  postcards_footer: true
+
+sources:
+  dashboard:
+    url: https://radiopaedia.org/admin/restricted_pages/3606
+    # CSS selector for the part of the page to capture. null = full page.
+    selector: null
+    viewport_width: 1200
+    # Extra wait (ms) after load so charts finish drawing.
+    wait_ms: 3000
+  release_notes:
+    url: https://radiopaedia.org/release-notes
+  next_meeting:
+    url: https://radiopaedia.org/next-editor-meeting
+  social_magic_moments:
+    # Radiopaedia Chat (Mattermost) - read via its API using your browser login.
+    chat_base: https://radiopaedia.org/chat
+    team: editorial-board
+    channel: social-magic-moments
+  style_guide:
+    # Arlene's Google Doc
+    doc_id: 1UXBCNyfSWjalRA64DuDwOyJtwiHRqV2CUlJydv-q8p8
+    tab: t.0
+
+# Persistent browser profile used for logged-in scraping (`qm login` once).
+browser_profile: ~/.quantum-mottle/browser-profile
