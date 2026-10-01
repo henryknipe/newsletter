@@ -8,6 +8,8 @@ Supported syntax (deliberately small, so it survives every mail client):
     "→ item"            -> arrow line (the older Meet-up style)
 """
 
+from __future__ import annotations
+
 import html
 import re
 

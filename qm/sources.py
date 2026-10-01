@@ -35,13 +35,17 @@ def open_browser(headless: bool = True):
     profile = Path(cfg.get("browser_profile", "~/.quantum-mottle/browser-profile")).expanduser()
     profile.mkdir(parents=True, exist_ok=True)
     pw = sync_playwright().start()
-    ctx = pw.chromium.launch_persistent_context(
-        str(profile),
-        executable_path=cfg.get("browser_executable") or None,
-        headless=headless,
-        viewport={"width": 1200, "height": 900},
-        device_scale_factor=2,
-    )
+    opts = dict(headless=headless, viewport={"width": 1200, "height": 900}, device_scale_factor=2)
+    try:
+        ctx = pw.chromium.launch_persistent_context(
+            str(profile), executable_path=cfg.get("browser_executable") or None, **opts
+        )
+    except Exception as e:
+        if "Executable doesn't exist" not in str(e):
+            raise
+        # Playwright's own Chromium isn't downloaded: fall back to the installed Google Chrome.
+        print("Playwright's Chromium isn't installed - using your Google Chrome instead.")
+        ctx = pw.chromium.launch_persistent_context(str(profile), channel="chrome", **opts)
     return pw, ctx
 
 
