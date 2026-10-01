@@ -1,0 +1,28 @@
+# Fixed settings for the Quantum Mottle builder.
+
+newsletter:
+  subject: "Quantum Mottle - {month} {year}"
+  from: "Henry Knipe <henry.knipe@radiopaedia.org>"
+  # The .eml is addressed to Henry; he adds the editorial board as BCC when sending.
+  to: "henry.knipe@radiopaedia.org"
+  contact_email: "henry.knipe@radiopaedia.org"
+  contact_dm_url: "https://radiopaedia.org/chat/editorial-board/messages/@henryknipe"
+  nav:
+    - {label: Home, url: "https://www.radiopaedia.org"}
+    - {label: Projects, url: "https://www.radiopaedia.org/projects"}
+    - {label: Chat, url: "https://www.radiopaedia.org/chat"}
+  # The "Made with postcards" badge + tracking pixel from the Postcards export.
+  postcards_footer: true
+
+# Update icons by name (`icon: mri`). These are already hosted by Postcards from past issues.
+# Add your own: upload a PNG to Postcards and copy its URL, or put a PNG in the issue folder and use its file name.
+icons:
+  default: https://cloudfilesdm.com/postcards/7f35aea5059ebba5c0d95dfc5fa417f9-3915c34e.png
+  release: https://cloudfilesdm.com/postcards/image-1748146878957-67f60a02.png
+  evidence: https://cloudfilesdm.com/postcards/evidence-661952ad.png
+  mcq: https://cloudfilesdm.com/postcards/59b266c71c5cd44516c666df3f7dc816-6dfb004c.png
+  mri: https://cloudfilesdm.com/postcards/mri-c43c004b.png
+  add: https://cloudfilesdm.com/postcards/add_1242520-32c7638b.png
+  clown: https://cloudfilesdm.com/postcards/clown_2271762-7f17ae69.png
+  search: https://cloudfilesdm.com/postcards/search_1828048-f9df3c7b.png
+  muscle: https://cloudfilesdm.com/postcards/muscle_7908631-22ff8de8.png

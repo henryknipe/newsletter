@@ -1,0 +1,79 @@
+# Quantum Mottle - April 2026 (as sent; transcribed from the Postcards export)
+
+editor_in_chief:
+  body: |
+    Generative AI has been around for quite a while, and various tools have been in use for quite a while. However, this [2026 paper](https://pubs.rsna.org/doi/10.1148/radiol.252094) reinforced our concerns about deepfake medical images and the risk they pose to Radiopaedia's reputation. We have already had one user suspected of uploading AI-generated x-rays (which were identified before publication, thankfully!).
+
+    As a result, we now have a formal [Generative AI policy](https://radiopaedia.org/generative-artificial-intelligence-policy), but the TLDR is that AI-created content should not be uploaded to Radiopaedia, whether in case discussions, articles, or images. However, AI tools are most certainly to be used appropriately. For example, Jeremy has created an awesome review tool for those involved in the CME review project.
+
+    One major change is that Radiopaedia can no longer accept "single image cases" (regardless of whether they are in DICOM or jpg/png format) as this is currently the highest-risk category. The style guide has been updated in various locations to reflect this, and there is a new Editor Comment - "Single image cases not accepted" (id: 341) to assist you in the moderation process.
+
+    Any questions, please hit up [Radiopaedia Chat](https://radiopaedia.org/chat/editorial-board/channels/town-square).
+
+dashboard:
+  image_url: https://cloudfilesdm.com/postcards/CleanShot_2026-04-24_at_08.56.28%402x-5c34b4f0.png
+
+updates:
+  - title: April Fools
+    icon: clown
+    body: |
+      Well done to the team for the reCAPTCHA prank and the usual Rick Roll!
+
+      I get done pretty much every year, and even posted about how we were now training AI via reCAPTCHA!!
+  - title: Special pages now in search
+    icon: search
+    body: |
+      Special pages, such as Paediatric X-ray Atlas and Programmable CSF Shunt page, are now visible in the search results.
+  - title: Community Team Project
+    icon: muscle
+    body: |
+      As part of getting Radiopaedia as well-referenced as possible, we identified 140 Anatomy articles we no references.
+
+      I asked a few recent contributors in the Anatomy section to participate (along with Craig Hacking) in adding references to the articles, and it was done very quickly!
+
+      I'm quite excited to run a few more projects utilising the wider Radiopaedia communtiy.
+
+release_updates:
+  items:
+    - "**Editor & viewer fixes:** Resolved bugs with content saving, image layouts, large uploads, Grammarly coverage, and fullscreen playlist navigation"
+    - "**Viewer & offline improvements:** Faster offline downloads, consistent annotations, and full offline support in the fullscreen viewer"
+    - "**Admin & notifications:** Added notification duplication, searchable static pages, CSV export, and flexible notification targeting"
+
+style_guide:
+  body: |
+    When reviewing cases that include clinical photographs of paediatric patients, editors should always check that proper consent has been documented. Clinical images of children require explicit permission, even when the images appear non-identifying.
+
+    If consent is not clearly stated in the case, or if there is any uncertainty, please query the contributor or hold the case until confirmation is obtained. This helps maintain Radiopaedia's standards of privacy, safety, and ethical publishing.
+
+    More info: [https://radiopaedia.org/articles/patient-confidentiality](https://radiopaedia.org/articles/patient-confidentiality)
+
+meetup:
+  month: April
+  style: arrows
+  discussed:
+    - Generative AI - pros, cons, uses, limitations
+    - /edits and Editorial Projects are ticking along
+    - New Radiopaedia team member "Evidence-based manager" is almost certain to commence, awaiting confirmation of funding, to assist with Stagings, Classifications, white papers, etc
+    - "R26: rPosters scored/decided, video content incoming"
+    - "R27: likely change to format of rPosters to combat AI-generated content"
+  who: All Radiopaedia editors - ALL WELCOME!
+  next: Wed 13th May 0900 UTC
+
+priority_project:
+  label: Editorial Project
+  name: Oprhan Articles 2
+  body: |
+    Adding incoming links to articles that have none.
+
+    Only 2% complete at this stage, please take a look
+    and help bring this articles in from the cold!
+
+social_magic_moments:
+  items:
+    - intro: "Thanks to Duncan (Radiopaedia's Principal Engineer) for sharing this message (which I've paraphrased!):"
+      body: |
+        I showed a friend who works at a tech start-up Radiopaedia the other day and they were marvelling at how snappy it is; also the scrollable MRI viewer is very nice to use.
+
+        Really love to hear our Devs get some love and recognition. They do an absolutely awesome job of keeping Radiopaedia online and developing new features for us all the time!
+    - intro: "And Murf shared this blast from the past with me, with the message I sent him more than a decade ago about uploading his first case!"
+      image_url: https://cloudfilesdm.com/postcards/CleanShot_2026-04-11_at_11.16.34%402x-07551369.jpg

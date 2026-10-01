@@ -1,0 +1,71 @@
+# Quantum Mottle - {{ issue.month_name }} {{ issue.year }}
+# Covers what's happened since the last issue. Past issues in examples/ show the format.
+#
+# Text fields accept light markdown: **bold**, *italic*, [link](https://...),
+# blank line = new paragraph, "- item" = bullet, "→ item" = arrow line.
+# Any section can take `body_file: something.md` instead of `body:`.
+# Delete a section (or leave its body empty) to leave it out of the email.
+
+# subject: "Quantum Mottle - {{ issue.month_name }} {{ issue.year }}"   # default from config.yaml
+preheader: ""          # inbox preview text, optional
+
+editor_in_chief:
+  body_file: editor_in_chief.md
+  signoff: "-H"
+
+dashboard:
+  # The screenshot Henry uploads, saved into the issue folder. Or image_url: https://...
+  image: dashboard.png
+
+# Two per row (an odd last one goes full width). icon: a name from config.yaml
+# `icons:` (evidence, mcq, mri, add, clown, search, muscle...), a URL, or a file
+# in the issue folder (e.g. a PNG from magnific.com/icons).
+updates:
+  - title: TODO
+    icon: default
+    body: |
+      TODO
+    # url: https://radiopaedia.org/...
+  - title: TODO
+    icon: release
+    body: |
+      TODO
+
+release_updates:
+  # Summarise the release notes Henry pastes into 3 terse bullets.
+  items:
+    - TODO
+
+style_guide:
+  author: Arlene Campos
+  # Arlene's piece for this month, saved as style_guide.md (or use body: directly).
+  body_file: style_guide.md
+  # link: https://radiopaedia.org/articles/style-guide
+  # link_text: Read more in the style guide
+
+meetup:
+  month: {{ issue.month_name }}
+  # style: arrows        # older "→" look; default is bullets
+  discussed:
+    - TODO
+  # From radiopaedia.org/next-editor-meeting
+  next: "TODO 0730 UTC"
+  # who: All Radiopaedia editors
+
+priority_project:
+  # label: Editorial Project     # default "Priority Project"
+  name: |
+    TODO
+  body: |
+    TODO
+  # button_text: Get Involved!
+  # button_url: https://www.radiopaedia.org/projects
+
+social_magic_moments:
+  # Several items get a divider between them.
+  heading: true
+  items:
+    - intro: "Thanks to TODO for sharing this lovely message:"
+      body: |
+        TODO
+      # image: screenshot.png   (a file in the issue folder, or image_url: https://...)

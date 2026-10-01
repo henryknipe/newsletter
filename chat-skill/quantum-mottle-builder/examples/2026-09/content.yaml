@@ -1,0 +1,91 @@
+# Quantum Mottle - September 2026 (as sent; transcribed from the Postcards export)
+
+editor_in_chief:
+  body: |
+    The topic of [Case discussion](https://radiopaedia.org/articles/case-discussion) has come up again, and I'm not surprised given how quickly generative AI is progressing. I don't think the question is "was this written by AI?" We have a Generative AI policy and some Editor Comments to help with the mechanics, but the test that matters is much simpler. Is the discussion about the patient?
+
+    One of my registrars recently wrote a case discussion on this [Microcystic meningioma](https://radiopaedia.org/cases/microcystic-meningioma-4) case that was maybe six sentences long, and it was exactly what we are aiming for. It related the symptoms to the imaging findings, explained how the diagnosis was established and how the patient was managed, and left one or two learning points. Nothing about it duplicated the article... because that is what the article is for.
+
+    It's the classic case report "lit review" style that's the problem, whoever or whatever wrote it. It creates "multiple sources of truth", where the case says one thing and our article says another.
+
+    My rule of thumb is that if it reads like "AI-slop", push back to draft - I've been doing this with curiosity rather than accusing them of doing something wrong, so as always, keep the messaging kind and helpful. If you are unsure, please post in the Moderation channel or escalate to one of the managing/senior editors or to me.
+
+dashboard:
+  image_url: https://cloudfilesdm.com/postcards/CleanShot_2026-09-08_at_10.34.33_AM-fca6abfe.png
+
+updates:
+  - title: EBC update
+    icon: evidence
+    body: |
+      Karina has hit the ground running as our EBC manager:
+      - ~30% of the classification articles have been reviewed
+      - 13 articles got accredited
+      - 11 articles are almost there (ready status)
+      - 4 need minor revision
+      - 8 articles require major revision
+  - title: Style guide updates
+    icon: release
+    body: |
+      When a dimension operator is used, it should be a lowercase "x" (and not a hex code multiplication sign). For example, 6 x 7 x 67 mm.
+
+      No need to translate between UK and US English when moderating, it's done auto-magically.
+
+      New articles
+      - [CT nomenclature guidelines](https://radiopaedia.org/articles/ct-nomenclature-guidelines)
+      - [in vs on](https://radiopaedia.org/articles/in-vs-on)
+
+release_updates:
+  items:
+    - "Licensing and CME: case tokens show licensing availability and author preference, board cards show editor locations, and playlist CME now credits the case actually on screen."
+    - "Case image privacy: images from unlisted, draft and pending-review cases no longer appear on articles, the sitemap or exports."
+    - "Fixes: certificate verification, institution member cards, API case tagging, and image processing no longer blocking case updates."
+
+style_guide:
+  body: |
+    **Annotations in Action**
+
+    **🧠 Did You Know?**
+    [Annotations](https://radiopaedia.org/articles/annotations) make Radiopaedia cases awesome! They highlight key findings directly on images and link from the [findings](https://radiopaedia.org/articles/findings-cases) text. This makes it easier for readers to connect what's written in the imaging findings and what the images show.
+
+    **✅ Why use them?**
+    - annotations make cases clearer and more engaging
+    - great for teaching and learning, since readers can click on labels in Findings and jump straight to the spot on the image
+
+    **✍️ Tips for editors when reviewing annotations:**
+    - match annotations precisely with what is described in the findings
+    - keep the label short and standard
+    - focus on the most important features since too many labels can clutter the image
+    - always preview with and without annotations before publishing
+
+    Look out for orange text in the findings section. That is your cue that annotations are active!
+
+meetup:
+  month: September
+  discussed:
+    - Our new EBC manager, Karina, has spent her first week reviewing articles, with new banners across the site now flagging the EBC status.
+    - Operation Anatomy Stubs is nearly done, with 216 articles reviewed, stub articles folded into parent articles or references added.
+    - A discussion on case discussions.
+    - The style guide is planning to move out of the Reference Library and into a dedicated site section with expandable sections and inline images; see the [medical illustration](https://radiopaedia.org/medical-illustrations) page as an example.
+    - The editor of Last's Anatomy, who knows Craig, is keen to improve alignment between Last's and Radiopaedia, potentially as an Editor Fellow project.
+  next: Wed 30th September 0730 UTC
+
+priority_project:
+  name: |
+    Operation Annotation Aces
+    Core Conditions Edition
+
+social_magic_moments:
+  heading: false
+  items:
+    - intro: "Thanks to Rachel for sharing this lovely **Social Magic Moments** message:"
+      body: |
+        I honestly cannot express how much this means to me. When I sent my email, I hoped there might be some way for students in Iran to access the courses, but I never expected such a generous response.
+
+        Receiving this email genuinely made my day, and, to be honest, I became quite emotional when I read it. This 12-month All-Access Pass is not just an opportunity to access educational resources for me; it is a chance to learn, improve my knowledge, and continue developing my skills despite the financial and other limitations we face.
+
+        ...
+
+        Thank you again, from the bottom of my heart, for your generosity, understanding, and support. It means more to me than I can put into words.
+
+        With my sincere gratitude,
+        Fateme Sorche (Iran)

@@ -134,3 +134,14 @@ changed blocks across.
 ```bash
 python -m pytest -q
 ```
+
+## Claude Chat version
+
+`chat-skill/quantum-mottle-builder.skill` is the same builder packaged as a skill for
+Claude Chat (claude.ai). Install it once in Settings -> Capabilities -> Skills. Then, in a chat,
+upload the dashboard screenshot, paste the month's material and ask for the issue. You get
+the preview and the `.eml` back to download.
+
+`chat-skill/quantum-mottle-builder/` is a copy of `qm/`, `templates/`, `config.yaml` and
+`examples/` with chat-specific wording. If you change the design here, ask Claude to refresh
+the copy and re-package it.
