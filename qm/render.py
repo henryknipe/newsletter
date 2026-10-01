@@ -16,12 +16,8 @@ from markupsafe import Markup
 from . import formatting as fmt
 from .config import ROOT, Issue, load_config
 
-# The two update icons from the original Postcards template. Used when an
-# update doesn't set its own `icon:`.
-DEFAULT_ICONS = [
-    "https://cloudfilesdm.com/postcards/7f35aea5059ebba5c0d95dfc5fa417f9-3915c34e.png",
-    "https://cloudfilesdm.com/postcards/image-1748146878957-1fa729b1.png",
-]
+# Used when an update doesn't set its own `icon:` (the two from the Postcards template).
+DEFAULT_ICONS = ["default", "release"]
 
 GREY = "rgb(135,135,135)"
 
@@ -97,6 +93,11 @@ def build_context(issue: Issue, content: dict, images: ImageRegistry) -> dict:
         eic_text = f"{eic_text}\n\n{signoff}"
     eic_html = fmt.blocks(eic_text, size=18, line_height="140%", color=GREY)
 
+    icons = cfg.get("icons", {})
+
+    def icon(name):
+        return images.resolve(icons.get(name, name)) if name else None
+
     dash = content.get("dashboard") or {}
     dashboard_src = images.resolve(dash.get("image_url") or dash.get("image"))
 
@@ -106,7 +107,7 @@ def build_context(issue: Issue, content: dict, images: ImageRegistry) -> dict:
             {
                 "title": u.get("title", ""),
                 "url": u.get("url"),
-                "icon_src": images.resolve(u.get("icon") or DEFAULT_ICONS[i % 2]),
+                "icon_src": icon(u.get("icon") or DEFAULT_ICONS[i % 2]),
                 "body_html": Markup(fmt.blocks(u.get("body"), color=GREY)),
                 "underline": False,
             }
@@ -122,26 +123,26 @@ def build_context(issue: Issue, content: dict, images: ImageRegistry) -> dict:
             {
                 "title": rel.get("title", "Release Updates"),
                 "url": rel.get("url", "https://radiopaedia.org/release-notes"),
-                "icon_src": images.resolve(rel.get("icon") or DEFAULT_ICONS[len(cells) % 2]),
+                "icon_src": icon(rel.get("icon") or "release"),
                 "body_html": Markup(fmt.blocks(body, color=GREY)),
                 "underline": True,
             }
         )
+    # Two per row; an odd one out spans the full width (as in the September 2026 issue).
     rows = [cells[i : i + 2] for i in range(0, len(cells), 2)]
-    if rows and len(rows[-1]) == 1:
-        rows[-1].append(None)
 
     sg = content.get("style_guide") or {}
     sg_body = sg.get("body") or ""
     if sg.get("link"):
         sg_body += f"\n\n[{sg.get('link_text', 'Read more in the style guide')}]({sg['link']})"
-    style_guide_html = fmt.blocks(sg_body, size=18, line_height="24px", color="rgb(238,238,238)")
+    style_guide_html = fmt.blocks(sg_body, size=18, line_height="22px", color="rgb(238,238,238)")
 
     mu = content.get("meetup") or {}
-    mu_lines = [f"At the {mu.get('month', issue.prev_month_name)} meeting, we discussed:"]
+    mu_lines = [f"At the {str(mu.get('month', issue.month_name)).upper()} meeting, we discussed:"]
     items = mu.get("discussed") or []
     if items:
-        mu_lines.append("\n".join(f"- {x}" for x in items))
+        marker = "→ " if mu.get("style") == "arrows" else "- "
+        mu_lines[0] += "\n" + "\n".join(marker + str(x) for x in items)
     where = mu.get("where", "[bit.ly/radio-update](https://bit.ly/radio-update) (Google Meet)")
     mu_lines.append(
         f"Who: {mu.get('who', 'All Radiopaedia editors')}\n"
@@ -154,17 +155,23 @@ def build_context(issue: Issue, content: dict, images: ImageRegistry) -> dict:
     project = None
     if pp and pp.get("name"):
         project = {
-            "name": pp["name"],
+            "label": pp.get("label", "Priority Project"),
+            "name_lines": [ln for ln in str(pp["name"]).splitlines() if ln.strip()],
             "body_html": Markup(fmt.blocks(pp.get("body"), size=20, color="rgb(255,255,255)", align="center")),
             "button_text": pp.get("button_text", "Get Involved!"),
             "button_url": pp.get("button_url", "https://www.radiopaedia.org/projects"),
         }
 
     sm = content.get("social_magic_moments") or {}
-    sm_body = sm.get("body") or ""
-    if sm.get("credit"):
-        sm_body += f"\n\n*{sm['credit']}*"
-    social_html = fmt.blocks(sm_body, color=GREY)
+    social_items = []
+    for it in sm.get("items") or ([sm] if sm.get("body") else []):
+        text = "\n\n".join(x for x in (it.get("intro"), it.get("body")) if x)
+        social_items.append(
+            {
+                "html": Markup(fmt.blocks(text, color=GREY)),
+                "image_src": images.resolve(it.get("image_url") or it.get("image")),
+            }
+        )
 
     subject = content.get("subject") or nl.get("subject", "Quantum Mottle - {month} {year}").format(
         month=issue.month_name, year=issue.year
@@ -175,13 +182,15 @@ def build_context(issue: Issue, content: dict, images: ImageRegistry) -> dict:
         "issue_label": content.get("issue_label", f"{issue.month_name} {issue.year}"),
         "eic_html": Markup(eic_html),
         "dashboard_src": dashboard_src,
-        "dashboard_alt": dash.get("alt", f"Radiopaedia dashboard, {issue.prev_month_name} {issue.prev_year}"),
+        "dashboard_alt": dash.get("alt", f"Radiopaedia dashboard, {issue.month_name} {issue.year}"),
         "update_rows": rows,
         "style_guide_html": Markup(style_guide_html),
         "style_guide_author": sg.get("author", "Arlene Campos"),
         "meetup_html": Markup(meetup_html),
         "project": project,
-        "social_html": Markup(social_html),
+        "social_heading": sm.get("heading", True),
+        "social_items": social_items,
+        "nav": nl.get("nav", []),
         "contact_email": nl.get("contact_email", "henry.knipe@radiopaedia.org"),
         "contact_dm_url": nl.get("contact_dm_url", "https://radiopaedia.org/chat/editorial-board/messages/@henryknipe"),
         "postcards_footer": nl.get("postcards_footer", True),

@@ -1,0 +1,80 @@
+# Quantum Mottle - August 2026 (as sent; transcribed from the Postcards export)
+
+editor_in_chief:
+  body: |
+    What a month it has been - R26 was a roaring success, and I enjoyed getting on the chat while listening to lectures and playing the various games in the downtime! A big congratulations to the co-conveners Sally Ayesa, Daniel Gewolb, and Vikas Shah, ably supported by Andrew Dixon, Andrew Murphy, Michael Nel, and Emily Chetwin.
+
+    I also had the chance to catch up with Frank, as Bluey would say, "In real life," at the Tasmanian Branch ASM (Frank has gone from a conference of ~15,000 participants to maybe 40!), but it was a great reminder of what we've built as I listened to Frank's "History of Radiopaedia" talk for maybe the tenth time!
+
+    In the background, I have started onboarding Karina as our brand-new Evidence-Based Content Manager and am working through various "back-of-house" projects that have been on the back burner, with a focus on contributor interactions and editorial board composition.
+
+dashboard:
+  image_url: https://cloudfilesdm.com/postcards/CleanShot_2026-08-18_at_12.25.24-81e4dd9f.png
+
+updates:
+  - title: MCQs
+    icon: mcq
+    body: |
+      Quick reminder, that will contributing questions to follow the [MCQ style guide](https://radiopaedia.org/articles/multiple-choice-questions), in particular, ensuring the [answer options](https://radiopaedia.org/articles/alternatives-multiple-choice-questions) are listed in alphabetical order!
+  - title: Gantry Rush
+    icon: mri
+    body: |
+      Murph's excellent game - Gantry Rush - was an awesome R26 bonus. Click [HERE](https://murf-hub.vercel.app/gantry-rush/index.html) to continue playing.
+  - title: Your first few cases
+    icon: add
+    body: |
+      Frank has created a new [landing page](https://radiopaedia.org/uploading-cases#step-1) to help folk upload their first few cases - feel free to distribute to interested colleagues, but more importantly, send the link through to new contributors who are getting a hang of how to publish a case on Radiopaedia.
+
+release_updates:
+  items:
+    - Old case viewer retired; all cases now open in the current viewer
+    - Anyone logged in can start a discussion on an article (editors too, on questions)
+    - '"Download Originals" now bundles all files including DICOMs, and single-image downloads return full resolution'
+
+style_guide:
+  body: |
+    **Don't Give It Away Too Soon!**
+
+    When reviewing the [Presentation](https://radiopaedia.org/articles/presentation-case) for a case, it is tempting to include more details rather than fewer; however, in [quiz mode](https://radiopaedia.org/articles/quiz-mode), the presentation is used to frame the case, so it should not give away too many details (such as the diagnosis!) too soon.
+
+    This allows our readers to work through the scenario as they would in real life.
+    It is a small detail, but one that is easy to overlook and makes a big difference in how the case is experienced.
+
+    P.S. Don't forget that age and gender actually belong in the [Patient data](https://radiopaedia.org/articles/patient-data) section.
+
+meetup:
+  month: August
+  style: arrows
+  discussed:
+    - Evidence-based content manager is imminently starting with a focus on accrediting existing articles
+    - R26 recap
+    - CME article reviews - continuing at a pace, aiming for >1000 articles
+    - AI-generated images, getting lots of feedback about "AI slop" - will be a project to review +/- replace
+  next: Wednesday 2nd September @ 0730 UTC
+
+priority_project:
+  name: |
+    Op Annotation Aces
+    Core Condition Edition
+  body: |
+    Help make our Core Conditions even better by providing annotations for featured cases.
+
+    Currently at 43.7% complete.
+
+    Please dive in and get this one all done!
+
+social_magic_moments:
+  items:
+    - intro: "Lots of love for R26, including this lovely message shared by Sally Ayesa:"
+      body: |
+        Dear Radiopaedia 2026 Organizing Committee and everyone behind Radiopaedia,
+
+        My name is Fahraddin A. Kamalov, a radiologist from Uzbekistan. I would like to sincerely thank all of you - founders, organizers, editors, authors, educators, reviewers, developers, volunteers, sponsors, and everyone working behind the scenes.
+
+        ...
+
+        Thank you for your dedication, generosity, and inspiration.
+
+        With sincere gratitude,
+        Fahraddin A. Kamalov
+        Uzbekistan

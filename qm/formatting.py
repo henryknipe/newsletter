@@ -4,7 +4,8 @@ Supported syntax (deliberately small, so it survives every mail client):
 
     **bold**   *italic*   [link text](https://...)
     blank line          -> new paragraph (rendered with an empty line between)
-    "- item" / "→ item" -> arrow bullet, matching the newsletter's house style
+    "- item"            -> bulleted list
+    "→ item"            -> arrow line (the older Meet-up style)
 """
 
 import html
@@ -15,7 +16,8 @@ FONT = "'Open Sans',Arial,Helvetica,sans-serif"
 _LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
 _BOLD = re.compile(r"\*\*(.+?)\*\*")
 _ITALIC = re.compile(r"(?<![*\w])\*(?!\s)(.+?)(?<!\s)\*(?![*\w])")
-_BULLET = re.compile(r"^\s*(?:[-*•]|→)\s+")
+_BULLET = re.compile(r"^\s*[-*•]\s+")
+_ARROW = re.compile(r"^\s*→\s*")
 
 
 def inline(text: str) -> str:
@@ -62,16 +64,39 @@ def blocks(
     )
     spacer = f'<div style="{div_style}"><br></div>'
 
+    li_style = f"margin-bottom:0;text-align-last:{align};{span_style}"
+
     out: list[str] = []
     for para in re.split(r"\n\s*\n", text.strip()):
         lines = [ln.rstrip() for ln in para.strip().splitlines() if ln.strip()]
         if out:
             out.append(spacer)
-        if all(_BULLET.match(ln) for ln in lines):
-            for ln in lines:
-                body = inline(_BULLET.sub("", ln, count=1))
-                out.append(f'<div style="{div_style}"><span style="{span_style}">→ {body}</span></div>')
-        else:
-            body = "<br>".join(inline(ln.strip()) for ln in lines)
-            out.append(f'<div style="{div_style}"><span style="{span_style}">{body}</span></div>')
+        text_run: list[str] = []
+        bullets: list[str] = []
+
+        def flush_text():
+            if text_run:
+                body = "<br>".join(inline(t) for t in text_run)
+                out.append(f'<div style="{div_style}"><span style="{span_style}">{body}</span></div>')
+                text_run.clear()
+
+        def flush_bullets():
+            if bullets:
+                items = "".join(f'<li style="{li_style}"><span style="{span_style}">{inline(b)}</span></li>' for b in bullets)
+                out.append(f'<ul style="margin:0;padding:0 0 0 20px">{items}</ul>')
+                bullets.clear()
+
+        for ln in lines:
+            if _BULLET.match(ln):
+                flush_text()
+                bullets.append(_BULLET.sub("", ln, count=1))
+            elif _ARROW.match(ln):
+                flush_text()
+                flush_bullets()
+                out.append(f'<div style="{div_style}"><span style="{span_style}">→ {inline(_ARROW.sub("", ln, count=1))}</span></div>')
+            else:
+                flush_bullets()
+                text_run.append(ln.strip())
+        flush_text()
+        flush_bullets()
     return "".join(out)

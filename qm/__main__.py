@@ -5,6 +5,7 @@
     python -m qm gather 2026-10     dashboard screenshot + raw sources
     python -m qm build 2026-10      render build/newsletter.html and .eml
     python -m qm check 2026-10      house-style / completeness warnings
+    python -m qm gmail 2026-10      Gmail draft (images embedded); --test / --send
 """
 
 import argparse
@@ -62,10 +63,28 @@ def cmd_check(issue: Issue, args):
     print("No problems found." if not warnings else f"{len(warnings)} warning(s).")
 
 
+def cmd_gmail(issue: Issue, args):
+    from . import gmail
+    from .config import load_config
+
+    bcc = gmail.read_bcc(args.bcc_file or load_config().get("newsletter", {}).get("bcc_file"))
+    if args.test:
+        print("Sent test to yourself:", gmail.send(issue, bcc=[], test=True))
+    elif args.send:
+        if not bcc:
+            sys.exit("No BCC recipients - set newsletter.bcc_file in config.local.yaml or pass --bcc-file.")
+        if input(f"Send {issue.slug} to {len(bcc)} BCC recipients now? Type 'send' to confirm: ").strip() != "send":
+            sys.exit("Not sent.")
+        print("Sent:", gmail.send(issue, bcc=bcc, test=False))
+    else:
+        print(f"Draft created ({len(bcc)} BCC):", gmail.create_draft(issue, bcc))
+        print("Open Gmail > Drafts to check it. Sending from the draft is fine; `--send` sends exactly what was built.")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="qm", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name, fn in (("new", cmd_new), ("login", cmd_login), ("gather", cmd_gather), ("build", cmd_build), ("check", cmd_check)):
+    for name, fn in (("new", cmd_new), ("login", cmd_login), ("gather", cmd_gather), ("build", cmd_build), ("check", cmd_check), ("gmail", cmd_gmail)):
         p = sub.add_parser(name)
         p.set_defaults(fn=fn)
         if name != "login":
@@ -77,6 +96,10 @@ def main(argv=None):
     sub.choices["build"].add_argument(
         "--inline-images", action="store_true", help="embed local images as data: URIs in the HTML (not Gmail-safe)"
     )
+    g = sub.choices["gmail"]
+    g.add_argument("--test", action="store_true", help="send a [TEST] copy to yourself only")
+    g.add_argument("--send", action="store_true", help="send to the BCC list (asks to confirm)")
+    g.add_argument("--bcc-file", help="file of editor addresses, one per line")
     args = ap.parse_args(argv)
     args.fn(Issue.parse(getattr(args, "issue", None)), args)
 

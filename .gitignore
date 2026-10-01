@@ -6,3 +6,5 @@ issues/*/sources/*
 !issues/*/sources/.gitkeep
 issues/*/build/
 issues/*/dashboard.png
+editors.txt
+*.bcc.txt

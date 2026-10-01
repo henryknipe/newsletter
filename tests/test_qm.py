@@ -17,9 +17,11 @@ def test_inline_escapes_and_formats():
     assert 'href="https://x.org/?a=1&amp;b=2"' in out
 
 
-def test_blocks_bullets_become_arrows():
-    out = fmt.blocks("Intro:\n\n- one\n- two")
-    assert out.count("→ ") == 2
+def test_blocks_lists_and_arrows():
+    out = fmt.blocks("Intro:\n- one\n- two\n\n→ arrow")
+    assert out.count("<li") == 2 and "<ul" in out
+    assert out.index("Intro:") < out.index("<ul")  # intro and list in one paragraph
+    assert out.count("→ ") == 1
     assert "<br></div>" in out  # spacer between paragraphs
 
 
@@ -82,8 +84,9 @@ def test_build_html_and_eml(issue):
     html = html_path.read_text(encoding="utf-8")
     assert "Hello" in html and "-H" in html
     assert 'src="../dashboard.png"' in html
-    assert "Release Updates" in html and "→ Faster" in html
-    assert "At the September meeting" in html
+    assert "Release Updates" in html and "Faster</span></li>" in html
+    assert "At the OCTOBER meeting" in html
+    assert html.count("width:50%;padding-top:0") == 4  # 3 updates + release = two full rows
     assert "The Style Guide" not in html  # empty section omitted
 
     msg = email.message_from_bytes(eml_path.read_bytes())
@@ -98,3 +101,30 @@ def test_build_html_and_eml(issue):
 
 def test_lint_flags_em_dash(issue):
     assert any("dash" in w for w in lint(issue))
+
+
+@pytest.mark.parametrize("slug", ["2026-04", "2026-08", "2026-09"])
+def test_examples_build(tmp_path, monkeypatch, slug):
+    import shutil
+
+    monkeypatch.setattr(config, "ISSUES", tmp_path)
+    shutil.copytree(config.ROOT / "examples" / slug, tmp_path / slug)
+    html = build(Issue.parse(slug))[0].read_text(encoding="utf-8")
+    assert "Quantum Mottle" in html and "-H" in html
+    assert "cloudfilesdm.com/postcards/CleanShot" in html  # hosted dashboard
+    if slug == "2026-09":  # 2 updates + release: the odd one spans the row
+        assert html.count("width:100%;padding-top:0") == 1
+
+
+def test_gmail_prepare(issue, tmp_path):
+    from qm import gmail
+
+    build(issue)
+    bccf = tmp_path / "bcc.txt"
+    bccf.write_text("# editors\na@x.org\nB <b@y.org>, c@z.org\n", encoding="utf-8")
+    bcc = gmail.read_bcc(str(bccf))
+    assert bcc == ["a@x.org", "b@y.org", "c@z.org"]
+    msg = email.message_from_bytes(gmail.prepare(issue, bcc=bcc, test=False))
+    assert msg["Bcc"] == "a@x.org, b@y.org, c@z.org" and msg["X-Unsent"] is None
+    test = email.message_from_bytes(gmail.prepare(issue, bcc=bcc, test=True))
+    assert test["Bcc"] is None and test["Subject"].startswith("[TEST]")
